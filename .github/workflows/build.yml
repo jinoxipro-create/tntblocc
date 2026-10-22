@@ -20,11 +20,18 @@ jobs:
         with:
           gradle-version: '9.7.1'
       - name: build
-        run: gradle build
+        run: |
+          FILE=$(find . -name settings.gradle -not -path './.git/*' | head -n 1)
+          if [ -z "$FILE" ]; then
+            echo "settings.gradle introuvable : les fichiers du mod ne sont pas sur GitHub"
+            exit 1
+          fi
+          cd "$(dirname "$FILE")"
+          gradle build
       - name: capture build artifacts
         uses: actions/upload-artifact@v7
         with:
           name: bloctnt-jar
           path: |
-            build/libs/*.jar
-            !build/libs/*-sources.jar
+            **/build/libs/*.jar
+            !**/build/libs/*-sources.jar
