@@ -1,0 +1,13 @@
+{
+	"required": true,
+	"package": "fr.jinoxi.bloctnt.mixin",
+	"compatibilityLevel": "JAVA_21",
+	"mixins": [
+		"BlockItemMixin",
+		"DisplayInvoker",
+		"TextDisplayInvoker"
+	],
+	"injectors": {
+		"defaultRequire": 1
+	}
+}
